@@ -6,8 +6,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const userRoutes = require('./routes/user')
+const loginRouter = require('./routes/login')
 
 app.use(userRoutes)
+app.use(loginRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

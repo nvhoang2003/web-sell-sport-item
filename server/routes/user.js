@@ -2,7 +2,9 @@ const express = require('express')
 const routes = express.Router()
 const userController = require('../controllers/user')
 
-routes.get('/users', userController.getAllUsers)
-routes.post('/user', userController.AddUser)
+const isAdmin = require('../middleware/isAdmin')
+
+routes.get('/users', isAdmin, userController.getAllUsers)
+routes.post('/user', isAdmin, userController.AddUser)
 
 module.exports = routes

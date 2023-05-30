@@ -1,4 +1,29 @@
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
+
+exports.signIn = async (req, res) => {
+  const { username, password } = req.body
+
+  User.findOne({
+    where: {
+      name: username,
+    },
+    include: {
+      all: true,
+      nested: true,
+    },
+  }).then((user) => {
+    if (user && user.password == password) {
+      // Tạo token
+      const token = jwt.sign({ username }, 'RANDOM_TOKEN_SECRET', {
+        expiresIn: '1h',
+      })
+      res.json({ token })
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' })
+    }
+  })
+}
 
 exports.getAllUsers = async (req, res) => {
   try {
