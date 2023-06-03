@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-const DB_NAME = 'webbando'
+const DB_NAME = 'database_development'
 const DB_USERNAME = 'root'
 const DB_PASSWORD = ''
 
